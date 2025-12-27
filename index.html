@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的工具箱 | CCY's Toolkit</title>
+    <style>
+        /* 全局变量 */
+        :root {
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-sub: #7f8c8d;
+            --accent-color: #3498db;
+            --hover-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --btn-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        /* 语言切换按钮 */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--btn-bg);
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .lang-switch:hover {
+            background: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: scale(1.05);
+        }
+
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding: 80px 20px 40px; /* 增加顶部padding给按钮留空间 */
+        }
+
+        h1 {
+            color: var(--text-main);
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            color: var(--text-sub);
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* 容器与网格布局 */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            padding-bottom: 60px;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--accent-color);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+
+        /* 箭头 */
+        .arrow {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .card:hover .arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 底部 */
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+
+        /* 深色模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --card-bg: #2d2d2d;
+                --text-main: #ecf0f1;
+                --text-sub: #bdc3c7;
+                --hover-shadow: 0 10px 20px rgba(0,0,0,0.3);
+                --btn-bg: rgba(45, 45, 45, 0.8);
+            }
+            body {
+                background-image: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">English</button>
+
+    <header>
+        <h1 data-zh="🛠️ 工具集散地" data-en="🛠️ CCY's Toolkit">🛠️ 工具集散地</h1>
+        <p class="subtitle" 
+           data-zh="简单好用的小工具合集" 
+           data-en="A collection of simple & useful web tools">
+           简单好用的小工具合集
+        </p>
+    </header>
+
+    <main class="container">
+        
+        <a href="https://ccymathphysics.github.io/luckydraw/" class="card" target="_blank">
+            <span class="icon">🎲</span>
+            <div class="card-title" data-zh="可汗大点兵" data-en="Lucky Draw">可汗大点兵</div>
+            <div class="card-desc" 
+                 data-zh="随机抽取，点名神器。<br>公平公正的运气测试。" 
+                 data-en="Random picker tool.<br>Fair and fast selection.">
+                 随机抽取，点名神器。<br>公平公正的运气测试。
+            </div>
+            <span class="arrow">→</span>
+        </a>
+
+        <a href="https://ccymathphysics.github.io/time/" class="card" target="_blank">
+            <span class="icon">⏰</span>
+            <div class="card-title" data-zh="全屏时钟" data-en="Full Screen Clock">全屏时钟</div>
+            <div class="card-desc" 
+                 data-zh="极简风格，专注当下。<br>适合学习计时的全屏显示。" 
+                 data-en="Minimalist clock.<br>Stay focused on the present.">
+                 极简风格，专注当下。<br>适合学习计时的全屏显示。
+            </div>
+            <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="card" style="opacity: 0.6; cursor: default;">
+            <span class="icon">🚧</span>
+            <div class="card-title" data-zh="敬请期待" data-en="Coming Soon">敬请期待</div>
+            <div class="card-desc" 
+                 data-zh="更多好用的工具<br>正在开发中..." 
+                 data-en="More tools are<br>under development...">
+                 更多好用的工具<br>正在开发中...
+            </div>
+        </a>
+
+    </main>
+
+    <footer>
+        <span data-zh="&copy; 2025 CCY. 保留所有权利。" data-en="&copy; 2025 CCY. All rights reserved.">
+            &copy; 2025 CCY. 保留所有权利。
+        </span>
+    </footer>
+
+    <script>
+        // 初始化语言状态
+        let currentLang = localStorage.getItem('lang') || 'zh';
+
+        // 页面加载时应用语言
+        document.addEventListener('DOMContentLoaded', () => {
+            applyLanguage(currentLang);
+        });
+
+        // 切换语言函数
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('lang', currentLang); // 保存设置
+            applyLanguage(currentLang);
+        }
+
+        // 应用语言到 DOM
+        function applyLanguage(lang) {
+            // 更新所有带有 data-zh 和 data-en 的元素
+            const elements = document.querySelectorAll('[data-zh]');
+            elements.forEach(el => {
+                if (lang === 'en') {
+                    el.innerHTML = el.getAttribute('data-en');
+                } else {
+                    el.innerHTML = el.getAttribute('data-zh');
+                }
+            });
+
+            // 更新按钮文字
+            const btn = document.getElementById('langBtn');
+            btn.innerText = lang === 'zh' ? 'English' : '中文';
+            
+            // 更新 HTML lang 属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        }
+    </script>
+</body>
+</html>
