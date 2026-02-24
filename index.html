@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCY的项目作品集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .project-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .project-link:hover {
+            background: #2980b9;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CCY的项目作品集</h1>
+        <p class="subtitle">分享我的代码成果与开源项目，点击卡片访问项目详情</p>
+    </header>
+    
+    <div class="projects-container" id="projects-container">
+        <!-- 项目卡片将通过JavaScript动态生成 -->
+    </div>
+    
+    <footer>
+        <p>© 2026 CCY的个人项目展示网站 | 持续更新中</p>
+    </footer>
+
+    <script>
+        // 项目数据 - 方便后期维护添加新项目
+        const projects = [
+            {
+                id: 1,
+                title: "CCY-Cloud",
+                description: "一个私有云盘服务，提供安全可靠的文件存储与分享功能，支持多设备同步与团队协作。",
+                url: "https://cloud.techccy.dpdns.org",
+                buttonText: "访问云盘"
+            },
+            {
+                id: 2,
+                title: "RainMail",
+                description: "创意雨天邮箱服务，当前天气晴朗时信箱封存，等到下雨时所有想法才会自动公开。",
+                url: "https://dropbox.techccy.dpdns.org",
+                buttonText: "投递信件"
+            }
+        ];
+        
+        // 生成项目卡片
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            let html = '';
+            
+            projects.forEach(project => {
+                html += `
+                <div class="project-card">
+                    <div class="project-content">
+                        <h2 class="project-title">${project.title}</h2>
+                        <p class="project-description">${project.description}</p>
+                        <a href="${project.url}" class="project-link" target="_blank">${project.buttonText}</a>
+                    </div>
+                </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // 页面加载完成后渲染项目
+        document.addEventListener('DOMContentLoaded', renderProjects);
+    </script>
+</body>
+</html>
